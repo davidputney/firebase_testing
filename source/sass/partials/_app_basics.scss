@@ -30,5 +30,19 @@
 .forms-container {
   max-width:rem(700);
   margin:rem(40) auto 0;
+}
+.history-table {
+  max-width: rem(1200);
+  margin:rem(40) auto;
+}
+.header-set-narrow {
+  width:rem(140);
+}
+.header-set-wide {
+  width:rem(500);
+}
+td, th {
+  padding:rem(3);
+  vertical-align: top;
 
 }
