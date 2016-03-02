@@ -9,7 +9,8 @@ var pageFunctions = {
     initializeIndex: function(){
       var self=this;
       this.intializeWatchers(); //listens for clicks
-      self.getForms();
+      // self.getForms();
+      self.dateSetter();
     },
     intializeHistory: function(){
       var self=this;
