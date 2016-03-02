@@ -31,6 +31,12 @@
   max-width:rem(700);
   margin:rem(40) auto 0;
 }
+.optional-form {
+  display:none;
+}
+.form-active {
+  display:block;
+}
 .history-table {
   max-width: rem(1200);
   margin:rem(40) auto;
