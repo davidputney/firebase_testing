@@ -35,27 +35,30 @@
       <option value="Improper Distribution (ID)">
     </datalist>
 
+    <div class="optional-form form-active">
+      <label>Discussion points</label>
+      <input list="discussion-points" name="discussion-points" /></label>
+      <datalist id="discussion-points">
+        <option value="Add to Watchlist">
+        <option value="Remove from Watchlist">
+        <option value="Adjust Watch Level">
+        <option value="Change Meeting Frequency">
+        <option value="Add Issues(s)">
+        <option value="Resolve Issues(s)">
+      </datalist>
+    </div>
 
-    <label>Discussion points</label>
-    <input list="discussion-points" name="discussion-points" /></label>
-    <datalist id="discussion-points">
-      <option value="Add to Watchlist">
-      <option value="Remove from Watchlist">
-      <option value="Adjust Watch Level">
-      <option value="Change Meeting Frequency">
-      <option value="Add Issues(s)">
-      <option value="Resolve Issues(s)">
-    </datalist>
+    <div class="optional-form">
+      <label>Meeting Date</label>
+      <input type="date" name="meeting-date" disabled><br>
+    </div>
 
-
-    <label>Meeting Date</label>
-    <input type="date" name="meeting-date"><br>
-
-    <label>Site visit date</label>
-    <select name="site-visit-date" id="site-visit-date">
-      <option value="general">Unassigned</option>
-    </select>
-    <div class="spacer-2"></div>
+    <div class="optional-form">
+      <label>Site visit date</label>
+      <select name="site-visit-date" id="site-visit-date" disabled>
+        <option value="unassigned">Unassigned</option>
+      </select>
+    </div>
 
 
     <div class="spacer-3"></div>
