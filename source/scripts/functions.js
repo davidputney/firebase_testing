@@ -82,9 +82,18 @@ var pageFunctions = {
       var ref=self.database;
       var usersRef = ref.child("users");
 
-      usersRef.orderByKey().on("value", function(snapshot) {
-        snapshot.forEach(function(data) {
-          console.log(data.val().nickname);
+      usersRef.orderByChild("date").on("value", function(snapshot) {
+        snapshot.forEach(function(data, i) {
+          var fooBar =
+          {
+            "key": data.key(),
+            "noteType": data.val().noteType,
+            "noteDate": data.val().noteDate,
+            "noteText": data.val().noteText,
+            "noteDealIssues": data.val().noteDealIssues,
+            "noteDiscussionPoints": data.val().noteDiscussionPoints
+          }
+          bar.push(fooBar);
         });
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
