@@ -35,6 +35,23 @@ var pageFunctions = {
 
       self.database = ref;
     },
+    dateSetter: function() {
+      var datePicker = document.getElementsByName('date')[0];
+      var meetingDatePicker = document.getElementsByName("meeting-date")[0];
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+      if(dd<10) {
+        dd='0'+dd
+      }
+      if(mm<10) {
+        mm='0'+mm
+      }
+      var dateSet = (yyyy + '-' + mm + '-' + dd);
+      datePicker.value = dateSet;
+      meetingDatePicker.value = dateSet;
+    },
     getForms: function() { // collects form data
       var self=this;
 
