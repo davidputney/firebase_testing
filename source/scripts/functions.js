@@ -55,17 +55,19 @@ var pageFunctions = {
     getForms: function() { // collects form data
       var self=this;
 
-      var name = document.getElementById('name').value;
-      var birth = document.getElementById('birth').value;
-      var userName = document.getElementById('user').value;
-      var nickname = document.getElementById('nickname').value;
+      var noteType = document.getElementsByName('note-type')[0].value;
+      var noteDate = document.getElementsByName('date')[0].value;
+      var noteText = document.getElementsByName('note-text')[0].value;
+      var noteDealIssues = document.getElementsByName('deal-issues')[0].value;
+      var noteDiscussionPoints = document.getElementsByName('discussion-points')[0].value;
 
-       var userInfo =
+       var noteInfo =
         {
-          "userName": userName,
-          "name": name,
-          "birth": birth,
-          "nickname": nickname
+          "noteType": noteType,
+          "noteDate": noteDate,
+          "noteText": noteText,
+          "noteDealIssues": noteDealIssues,
+          "noteDiscussionPoints": noteDiscussionPoints
         }
       self.handleDatabase(userInfo);
     },
