@@ -51,8 +51,10 @@ var pageFunctions = {
         mm='0'+mm
       }
       var dateSet = (yyyy + '-' + mm + '-' + dd);
-      datePicker.value = dateSet;
-      meetingDatePicker.value = dateSet;
+
+        datePicker.value = dateSet;
+        meetingDatePicker.value = dateSet;
+    },
     handleNoteTypeChanges: function (noteType) {
       var self=this;
       console.log(noteType);
