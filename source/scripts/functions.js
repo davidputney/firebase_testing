@@ -19,10 +19,13 @@ var pageFunctions = {
     intializeWatchers: function () {
       var self=this;
       var button = document.getElementById('submit');
-
-      button.addEventListener('click', function () {
+      var notePicker = document.getElementsByName('note-type')[0];
+      button.addEventListener('click', function() {
         console.log('click');
         self.getForms();
+      });
+      notePicker.addEventListener('change', function() {
+        console.log('blur');
       });
     },
     intializeDatabase: function() {
