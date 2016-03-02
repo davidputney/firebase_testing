@@ -26,6 +26,8 @@ var pageFunctions = {
       });
       notePicker.addEventListener('change', function() {
         console.log('blur');
+        self.handleNoteTypeChanges(notePicker.value)
+
       });
     },
     intializeDatabase: function() {
@@ -51,6 +53,36 @@ var pageFunctions = {
       var dateSet = (yyyy + '-' + mm + '-' + dd);
       datePicker.value = dateSet;
       meetingDatePicker.value = dateSet;
+    handleNoteTypeChanges: function (noteType) {
+      var self=this;
+      console.log(noteType);
+      handleDisable();
+
+      if (noteType === "previsit" || noteType === "followup") {
+        var siteVisitDate = document.getElementsByName('site-visit-date')[0];
+        handleSiteVisit(siteVisitDate);
+      }
+      if (noteType === "deal_issues") {
+        var siteVisitDate = document.getElementsByName('meeting-date')[0];
+        handleSiteVisit(siteVisitDate);
+      }
+      if (noteType === "general") {
+        var discussionPoints = document.getElementsByName('discussion-points')[0];
+        handleSiteVisit(discussionPoints);
+      }
+      function handleSiteVisit (el) {
+          el.disabled = false;
+          el.parentNode.classList.add('form-active');
+          // .classList.add("form-active");
+      }
+      function handleDisable () {
+        var active = [].slice.call(document.querySelectorAll(".form-active"));
+        active.forEach(function(el) {
+          el.classList.remove('form-active');
+          el.childNodes[3].disabled = true;
+          console.log(el.childNodes[3]);
+        });
+      }
     },
     getForms: function() { // collects form data
       var self=this;
