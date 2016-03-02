@@ -199,9 +199,7 @@ var pageFunctions = {
         noteDisplay.forEach(function(el) {
           tableRow.appendChild(el);
         });
-
         table.appendChild(tableRow);
-
         }
     }
   };
