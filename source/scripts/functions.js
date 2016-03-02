@@ -97,8 +97,56 @@ var pageFunctions = {
           }
           bar.push(fooBar);
         });
+        // console.log(bar);
+        self.handleTableData(bar);
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
       });
+    },
+    handleTableData: function(arr) {
+      var self=this;
+
+      var notesSorted =  arr.sort(function(a,b){
+          // console.log('a', a);
+          var c = new Date(a.noteDate);
+          var d = new Date(b.noteDate);
+          return c-d;
+        });
+
+      notesSorted.reverse();
+
+      notesSorted.forEach(function (el) {
+        // console.log(el);
+        buildResults(el)
+      });
+
+      function buildResults (dataItem) {
+        var tableRow = document.createElement("TR");
+        var table = document.getElementById('results-table');
+        var dataCellDate = document.createElement("TD");
+        var dataCellNoteType = document.createElement("TD");
+        var dataCellNoteText = document.createElement("TD");
+        var dataCellNoteDealIssues = document.createElement("TD");
+        var dataCellNoteDiscussionPoints = document.createElement("TD");
+
+        var a = document.createElement('A');
+            a.href = 'record.html?key=' + dataItem.key;
+            a.innerHTML = dataItem.noteDate;
+            dataCellDate.appendChild(a);
+
+        dataCellNoteType.innerHTML = dataItem.noteType;
+        dataCellNoteText.innerHTML = dataItem.noteText;
+        dataCellNoteDealIssues.innerHTML = dataItem.noteDealIssues;
+        dataCellNoteDiscussionPoints.innerHTML = dataItem.noteDiscussionPoints;
+
+        var noteDisplay = [dataCellDate, dataCellNoteType, dataCellNoteText, dataCellNoteDealIssues,  dataCellNoteDiscussionPoints];
+
+        noteDisplay.forEach(function(el) {
+          tableRow.appendChild(el);
+        });
+
+        table.appendChild(tableRow);
+
+        }
     }
   };
