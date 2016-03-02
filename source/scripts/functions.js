@@ -69,12 +69,12 @@ var pageFunctions = {
           "noteDealIssues": noteDealIssues,
           "noteDiscussionPoints": noteDiscussionPoints
         }
-      self.handleDatabase(userInfo);
+      self.handleDatabase(noteInfo);
     },
     handleDatabase: function (userInfo) { // adds info to DB
       var self=this;
       var ref=self.database;
-      var usersRef = ref.child("users");
+      var usersRef = ref.child("notes");
       var newPostRef = usersRef.push(userInfo);
     },
     retrieveDatabase: function () { //gets info from DB
