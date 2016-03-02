@@ -120,7 +120,9 @@ var pageFunctions = {
           "noteDate": noteDate,
           "noteText": noteText,
           "noteDealIssues": noteDealIssues,
-          "noteDiscussionPoints": noteDiscussionPoints
+          "noteDiscussionPoints": noteDiscussionPoints,
+          "noteMeetingDate": noteMeetingDate,
+          "noteSiteVisitDate": noteSiteVisitDate
         }
       self.handleDatabase(noteInfo);
     },
