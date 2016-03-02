@@ -1,15 +1,8 @@
-#Basic site
-Uses Gulp, Bourbon and HTML5 Boilerplate to create a start for a basic website or prototyping.
+#Firebase testing
+For testing an implementation of Firebase for use in rapid prototyping.
 
-##Precis
-* Sass and sass linting
-* Linting and minification.
-* SVG spriting
-* Responsive image sizing via Gulp imageMagick plugin and image minification.
-* Modularization of HTML pages.
-* Base64 font encoding.
-* Markdown conversion for handling and adding content.
-* Server with live reload
+##Basic site
+Based on my Basic Site boilerplate that uses Gulp, Bourbon and HTML5 Boilerplate to create a start for a basic website or prototyping.
 
 ##Installation
 * Clone
