@@ -89,11 +89,30 @@ var pageFunctions = {
     getForms: function() { // collects form data
       var self=this;
 
+      var noteDealIssuesSelect = document.getElementsByName('deal-issues')[0];
+      var noteDiscussionPointsSelect = document.getElementsByName('discussion-points')[0];
+      var noteMeetingDateSelect = document.getElementsByName('meeting-date')[0];
+      var noteSiteVisitDateSelect = document.getElementsByName('site-visit-date')[0];
+
       var noteType = document.getElementsByName('note-type')[0].value;
       var noteDate = document.getElementsByName('date')[0].value;
       var noteText = document.getElementsByName('note-text')[0].value;
-      var noteDealIssues = document.getElementsByName('deal-issues')[0].value;
-      var noteDiscussionPoints = document.getElementsByName('discussion-points')[0].value;
+
+      var noteDealIssues = !noteDealIssuesSelect.disabled
+        ? noteDealIssuesSelect.value
+        : false;
+
+      var noteDiscussionPoints = !noteDiscussionPointsSelect.disabled
+        ? noteDiscussionPointsSelect.value
+        : false;
+
+      var noteMeetingDate = !noteMeetingDateSelect.disabled
+        ? noteMeetingDateSelect.value
+        : false;
+
+      var noteSiteVisitDate = !noteSiteVisitDateSelect.disabled
+        ? noteSiteVisitDateSelect.value
+        : false;
 
        var noteInfo =
         {
