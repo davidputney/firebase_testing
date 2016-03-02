@@ -82,6 +82,7 @@ var pageFunctions = {
       console.log('retrieveDatabase');
       var ref=self.database;
       var usersRef = ref.child("notes");
+      var bar = []
 
       usersRef.orderByChild("date").on("value", function(snapshot) {
         snapshot.forEach(function(data, i) {
