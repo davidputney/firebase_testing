@@ -52,3 +52,11 @@ td, th {
   vertical-align: top;
 
 }
+.note-headline {
+  text-transform: capitalize;
+}
+.metadata-wrapper {
+  border-bottom:1px solid $med;
+  padding-bottom:rem(20);
+  margin-bottom:rem(20);
+}
