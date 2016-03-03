@@ -32,8 +32,7 @@ var pageFunctions = {
       });
       notePicker.addEventListener('change', function() {
         console.log('blur');
-        self.handleNoteTypeChanges(notePicker.value)
-
+        self.handleNoteTypeChanges(notePicker.value);
       });
     },
     intializeDatabase: function() {
