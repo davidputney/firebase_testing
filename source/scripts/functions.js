@@ -191,9 +191,11 @@ var pageFunctions = {
         var dataCellNoteDealIssues = document.createElement("TD");
         var dataCellNoteDiscussionPoints = document.createElement("TD");
 
+        var date = self.fixDate(dataItem.noteDate);
+
         var a = document.createElement('A');
             a.href = 'record.html?key=' + dataItem.key;
-            a.innerHTML = dataItem.noteDate;
+            a.innerHTML = date;
             dataCellDate.appendChild(a);
 
         dataCellNoteType.innerHTML = dataItem.noteType;
