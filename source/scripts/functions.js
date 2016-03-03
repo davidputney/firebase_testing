@@ -16,6 +16,12 @@ var pageFunctions = {
       var self=this;
       self.retrieveDatabase();
     },
+    initializeNoteView: function () {
+      var self=this;
+      var key = self.getNoteKey();
+      self.retrieveDatabaseNote(key);
+
+    },
     intializeWatchers: function () {
       var self=this;
       var button = document.getElementById('submit');
