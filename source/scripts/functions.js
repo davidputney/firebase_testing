@@ -256,13 +256,17 @@ var pageFunctions = {
       }
       if (entry.noteType === 'deal_issues') {
         var noteMeetingDateEl = document.createElement('P');
-        noteMeetingDateEl.innerHTML = '<strong>Meeting Date:</strong> ' + entry.noteMeetingDate;
+        var dateFixed = self.fixDate(entry.noteMeetingDate);
+        noteMeetingDateEl.innerHTML = '<strong>Meeting Date:</strong> ' + dateFixed;
         noteContent.insertBefore(noteMeetingDateEl, noteTextEl);
       }
-      console.log(entry.noteType);
       if (entry.noteType === 'previsit' || entry.noteType === 'followup') {
+        var date = !"undefined"
+        ? self.fixDate(entry.noteSiteVisitDate)
+        : entry.noteSiteVisitDate
+
         var noteSiteVisitDateEl = document.createElement('P');
-        noteSiteVisitDateEl.innerHTML = '<strong>Site Visit Date:</strong> ' + entry.noteSiteVisitDate;
+        noteSiteVisitDateEl.innerHTML = '<strong>Site Visit Date:</strong> ' + date;
         noteContent.insertBefore(noteSiteVisitDateEl, noteTextEl);
       }
 
