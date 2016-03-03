@@ -153,9 +153,7 @@ var pageFunctions = {
             "noteDate": data.val().noteDate,
             "noteText": data.val().noteText,
             "noteDealIssues": data.val().noteDealIssues,
-            "noteDiscussionPoints": data.val().noteDiscussionPoints,
-            "noteSiteVisitDate": data.val().noteSiteVisitDate,
-            "noteMeetingDate": data.val().noteMeetingDate
+            "noteDiscussionPoints": data.val().noteDiscussionPoints
           }
           bar.push(fooBar);
         });
@@ -208,72 +206,5 @@ var pageFunctions = {
         });
         table.appendChild(tableRow);
         }
-    },
-    retrieveDatabaseNote: function(key) {
-      var self=this;
-      var ref = new Firebase('https://putneydbtest.firebaseio.com/notes');
-
-      ref.child(key).on("value", function(snapshot) {
-        self.buildSingleRecordPage(snapshot.val());
-      });
-
-    },
-    buildSingleRecordPage: function(entry) {
-      var self=this;
-
-      console.log(entry);
-
-      var noteDate = self.fixDate(entry.noteDate);
-
-      var noteContainer = document.getElementById('note-wrapper');
-      var metaData = document.getElementById('metadata-wrapper');
-      var noteContent = document.getElementById('note-content')
-
-      var noteHedlineEl = document.createElement('H1');
-      noteHedlineEl.classList.add('note-headline');
-      var noteDateEl = document.createElement("P");
-      var noteDealIssuesEl = document.createElement('P');
-      var noteTextEl = document.createElement('P');
-
-
-      noteHedlineEl.innerHTML = entry.noteType + ' Note';
-      noteDateEl.innerHTML = '<strong>Note Date:</strong> ' + noteDate;
-      noteDealIssuesEl.innerHTML = '<strong>Deal issues:</strong> ' + entry.noteDealIssues;
-      noteTextEl.innerHTML = '<strong>Note text:</strong> ' + entry.noteText;
-
-      noteContainer.insertBefore(noteHedlineEl, metaData);
-      metaData.appendChild(noteDateEl);
-      noteContent.appendChild(noteDealIssuesEl);
-      noteContent.appendChild(noteTextEl);
-
-      // optional note types
-      if (entry.noteType === 'general'){
-        var noteDiscussionPointsEl = document.createElement('P');
-        noteDiscussionPointsEl.innerHTML = '<strong>Discussion Points:</strong> ' + entry.noteDiscussionPoints;
-        noteContent.insertBefore(noteDiscussionPointsEl, noteTextEl);
-      }
-      if (entry.noteType === 'deal_issues') {
-        var noteMeetingDateEl = document.createElement('P');
-        noteMeetingDateEl.innerHTML = '<strong>Meeting Date:</strong> ' + entry.noteMeetingDate;
-        noteContent.insertBefore(noteMeetingDateEl, noteTextEl);
-      }
-      console.log(entry.noteType);
-      if (entry.noteType === 'previsit' || entry.noteType === 'followup') {
-        var noteSiteVisitDateEl = document.createElement('P');
-        noteSiteVisitDateEl.innerHTML = '<strong>Site Visit Date:</strong> ' + entry.noteSiteVisitDate;
-        noteContent.insertBefore(noteSiteVisitDateEl, noteTextEl);
-      }
-
-    },
-    fixDate: function (date) {
-      var rawDate = new Date(date);
-      var resetDate = (rawDate.getMonth() + 1) + "/" + rawDate.getDate() + "/" + rawDate.getFullYear();
-      return resetDate;
-    },
-    getNoteKey: function() {
-      var self=this;
-      console.log('getNoteKey');
-         var url = window.location.search.substring(1).split('=')[1];
-         return url
     }
   };
