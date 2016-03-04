@@ -60,6 +60,25 @@ td, th {
   padding-bottom:rem(20);
   margin-bottom:rem(20);
 }
+.posting-modal {
+  width:rem(300);
+  height:rem(100);
+  border:1px solid $med;
+  box-shadow: rem(5) rem(5) rem(28) rgba($med, 0.5);
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  margin:auto;
+  background-color: $white;
+  align-items: center;
+  justify-content: center;
+  display:none;
+    h2 {
+      text-align:center;
+    }
+}
 .posting-modal--active {
   display:flex;
 }
