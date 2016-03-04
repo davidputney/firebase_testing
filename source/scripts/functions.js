@@ -341,12 +341,21 @@ var pageFunctions = {
       var self=this;
       var editButton = document.getElementById('submit');
       editButton.addEventListener('click', function(){
+    handlePostingModal: function(state, key) {
+      var self=this;
 
-        self.handleDatabaseEdit(key);
+      var postingModal = document.getElementById('posting-modal');
 
-        //  this should be part of a completion callback;
-        // window.location.href = 'record.html?key=' + key;
-      });
+      if (state === true) {
+        postingModal.classList.add('posting-modal--active');
+      }
+      if (state === false) {
+        setTimeout(function(){
+          postingModal.classList.remove('posting-modal--active');
+          window.location.href = 'record.html?key=' + key;
+        }, 1000);
+      }
+    },
     handleNoteEditDisplay: function(entryData) {
       var self=this;
 
