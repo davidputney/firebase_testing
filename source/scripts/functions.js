@@ -337,7 +337,16 @@ var pageFunctions = {
         window.location.href = 'record_edit.html?key=' + key;
       });
     },
+    handleEditSubmitButton: function(key) {
+      var self=this;
+      var editButton = document.getElementById('submit');
+      editButton.addEventListener('click', function(){
 
+        self.handleDatabaseEdit(key);
+
+        //  this should be part of a completion callback;
+        // window.location.href = 'record.html?key=' + key;
+      });
     },
     fixDate: function (date) {
       var rawDate = new Date(date);
