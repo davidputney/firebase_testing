@@ -11,6 +11,7 @@ var pageFunctions = {
       this.intializeWatchers(); //listens for clicks
       // self.getForms();
       self.dateSetter();
+      self.noteTypeSetter();
     },
     intializeHistory: function(){
       var self=this;
@@ -59,6 +60,14 @@ var pageFunctions = {
 
         datePicker.value = dateSet;
         meetingDatePicker.value = dateSet;
+    },
+    noteTypeSetter: function () {
+      var self=this;
+      var noteType = self.getNoteKey();
+      self.handleNoteTypeChanges(noteType);
+
+      var noteTypePicker =document.getElementsByName('note-type')[0];
+      noteTypePicker.value = noteType;
     },
     handleNoteTypeChanges: function (noteType) {
       var self=this;
