@@ -1,10 +1,10 @@
 <!doctype html>
 <html class="no-js" lang="">
     @@include('../html_partials/common/head.html')
-    <body  data-pagetype="note-read">
+    <body data-pagetype="note-edit">
         <!-- Add your site or application content here -->
         @@include('../html_partials/common/nav.html')
-        @@include('../html_partials/single_record.html')
+        @@include('../html_partials/record_edit_fields.html')
 
     </body>
     @@include('../html_partials/common/js_links.html')
@@ -12,7 +12,7 @@
     (function() {
       "use strict";
       pageFunctions.intialize();
-      pageFunctions.initializeNoteView();
+      pageFunctions.initializeNoteEdit();
     })();
     </script>
 </html>
