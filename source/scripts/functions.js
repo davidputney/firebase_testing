@@ -340,7 +340,7 @@ var pageFunctions = {
     },
     fixDate: function (date) {
       var rawDate = new Date(date);
-      var resetDate = (rawDate.getMonth() + 1) + "/" + rawDate.getDate() + "/" + rawDate.getFullYear();
+      var resetDate = (rawDate.getMonth() + 1) + "/" + (rawDate.getDate() + 1) + "/" + rawDate.getFullYear();
       return resetDate;
     },
     getNoteKey: function() {
