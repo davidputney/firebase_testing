@@ -347,6 +347,35 @@ var pageFunctions = {
         //  this should be part of a completion callback;
         // window.location.href = 'record.html?key=' + key;
       });
+    handleNoteEditDisplay: function(entryData) {
+      var self=this;
+
+      self.handleNoteTypeChanges(entryData.noteType);
+
+      var noteDealIssuesSelect = document.getElementsByName('deal-issues')[0];
+      var noteDateSelect = document.getElementsByName('date')[0];
+      var noteTextSelect = document.getElementsByName('note-text')[0];
+      var noteTypeSelect = document.getElementsByName('note-type')[0];
+
+
+      noteDateSelect.value = entryData.noteDate;
+      noteTextSelect.value = entryData.noteText;
+      noteDealIssuesSelect.value = entryData.noteDealIssues;
+      noteTypeSelect.value = entryData.noteType;
+
+      // optional data fields
+      if (entryData.noteType === 'general') {
+        var noteDiscussionPointsSelect = document.getElementsByName('discussion-points')[0];
+        noteDiscussionPointsSelect.value = entryData.noteDiscussionPoints;
+      }
+      if (entryData.noteType === 'deal_issues') {
+        var noteMeetingDateSelect = document.getElementsByName('meeting-date')[0];
+        noteMeetingDateSelect.value = entryData.noteMeetingDate;
+      }
+      if (entryData.noteType === "previsit" || entryData.noteType === "followup") {
+        var noteSiteVisitDateSelect = document.getElementsByName('site-visit-date')[0];
+        noteSiteVisitDateSelect.value = entryData.noteSiteVisitDate;
+      }
     },
     fixDate: function (date) {
       var rawDate = new Date(date);
