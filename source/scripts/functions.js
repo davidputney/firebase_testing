@@ -249,12 +249,20 @@ var pageFunctions = {
     },
     retrieveDatabaseNote: function(key) {
       var self=this;
+      var pageType= document.getElementsByTagName('BODY')[0].dataset.pagetype;
+
       var ref = new Firebase('https://putneydbtest.firebaseio.com/notes');
 
       ref.child(key).on("value", function(snapshot) {
-        self.buildSingleRecordPage(snapshot.val());
+        if (pageType === 'note-read') {
+          self.buildSingleRecordPage(snapshot.val());
+          self.handleEditButton(snapshot.key());
+        }
+        if (pageType === 'note-edit') {
+          self.handleNoteEditDisplay(snapshot.val());
+          self.handleEditSubmitButton(snapshot.key());
+        }
       });
-
     },
     buildSingleRecordPage: function(entry) {
       var self=this;
