@@ -159,9 +159,19 @@ var pageFunctions = {
     },
     handleDatabase: function (userInfo) { // adds info to DB
       var self=this;
+      var userInfo = self.getForms();
+      self.handlePostingModal(true);
       var ref=self.database;
       var usersRef = ref.child("notes");
-      var newPostRef = usersRef.push(userInfo);
+      var newPostRef = usersRef.push(userInfo, function(error) {
+        var postID = newPostRef.key();
+        if (error) {
+            console.log("Data could not be saved." + error);
+        } else {
+          console.log("Data saved successfully.");
+          self.handlePostingModal(false, postID);
+        }
+      });
     },
     retrieveDatabase: function () { //gets info from DB
       var self=this;
