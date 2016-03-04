@@ -34,7 +34,8 @@ var pageFunctions = {
       var notePicker = document.getElementsByName('note-type')[0];
       button.addEventListener('click', function() {
         console.log('click');
-        self.getForms();
+        // self.getForms();
+        self.handleDatabase();
       });
       notePicker.addEventListener('change', function() {
         console.log('blur');
