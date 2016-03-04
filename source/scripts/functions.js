@@ -21,7 +21,11 @@ var pageFunctions = {
       var self=this;
       var key = self.getNoteKey();
       self.retrieveDatabaseNote(key);
-
+    },
+    initializeNoteEdit: function () {
+      var self=this;
+      var key = self.getNoteKey();
+      self.retrieveDatabaseNote(key);
     },
     intializeWatchers: function () {
       var self=this;
