@@ -1,0 +1,74 @@
+<article class="forms-container" id="note-wrapper" data-pagetype="notes-edit">
+
+  <div id="metadata-wrapper" class="metadata-wrapper">
+    <p><strong>Partnership: </strong>Railroad Crossing Limited Partnership</p>
+    <p><strong>Note Creator: </strong>jsmith</p>
+  </div>
+
+  <div id="note-content">
+
+  </div>
+</article>
+<div class="forms-container">
+
+
+  <input type="hidden" name="note-type">
+
+  <label>Note Date</label>
+  <input type="date" name="date"><br>
+
+  <label>Note text</label>
+  <textarea id="note-text" name="note-text"></textarea>
+  <div class="spacer-1"></div>
+
+    <label>Deal issues</label>
+    <input list="deal-issues" name="deal-issues" /></label>
+    <datalist id="deal-issues">
+      <option value="Bad Debt (BD)">
+      <option value="Debt Coverage Ratio < 1.0 (DC)">
+      <option value="Delinquent Mortgage Payments (DM)">
+      <option value="Delinquent Taxes (DT)">
+      <option value="Distribution not Received (DR)">
+      <option value="Excessive Tenant Account Receivables (AR)">
+      <option value="Excessive Tenant Account Receivables (AR)">
+      <option value="GP Advances and Fees Accruing Interest (IA)">
+      <option value="Going Concern Opinion (OP)">
+      <option value="High Debt Service (DS)">
+      <option value="High Operating Expense (EX)">
+      <option value="High Payables Or Accrued Expenses (HP)">
+      <option value="Improper Distribution (ID)">
+    </datalist>
+
+    <div class="optional-form form-active">
+      <label>Discussion points</label>
+      <input list="discussion-points" name="discussion-points" /></label>
+      <datalist id="discussion-points">
+        <option value="Add to Watchlist">
+        <option value="Remove from Watchlist">
+        <option value="Adjust Watch Level">
+        <option value="Change Meeting Frequency">
+        <option value="Add Issues(s)">
+        <option value="Resolve Issues(s)">
+      </datalist>
+    </div>
+
+    <div class="optional-form">
+      <label>Meeting Date</label>
+      <input type="date" name="meeting-date" disabled><br>
+    </div>
+
+    <div class="optional-form form-active">
+      <label>Site visit date</label>
+      <select name="site-visit-date" id="site-visit-date" disabled>
+        <option value="unassigned">Unassigned</option>
+      </select>
+    </div>
+
+    <div class="spacer-3"></div>
+
+  <input type="submit" id="submit" name="submit" value="submit">
+</div>
+
+<div id="posting-modal" class="posting-modal">
+  <h2>Saving ...</h2>
+</div>
