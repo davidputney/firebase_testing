@@ -16,6 +16,7 @@ var pageFunctions = {
     intializeHistory: function(){
       var self=this;
       self.retrieveDatabase();
+      self.handleNoteCreate();
     },
     initializeNoteView: function () {
       var self=this;
@@ -72,6 +73,17 @@ var pageFunctions = {
 
       var noteTypePicker =document.getElementsByName('note-type')[0];
       noteTypePicker.value = noteType;
+    },
+    handleNoteCreate: function() {
+      var self=this;
+      var notePicker= document.getElementById('note-type-create');
+
+      notePicker.addEventListener('change', function() {
+        var noteType = notePicker.value;
+        setTimeout(function(){
+          window.location.href = 'index.html?noteType=' + noteType;
+        }, 300);
+      });
     },
     handleNoteTypeChanges: function (noteType) {
       var self=this;
