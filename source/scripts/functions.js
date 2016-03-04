@@ -147,15 +147,16 @@ var pageFunctions = {
 
        var noteInfo =
         {
-          "noteType": noteType,
           "noteDate": noteDate,
-          "noteText": noteText,
           "noteDealIssues": noteDealIssues,
           "noteDiscussionPoints": noteDiscussionPoints,
           "noteMeetingDate": noteMeetingDate,
-          "noteSiteVisitDate": noteSiteVisitDate
+          "noteSiteVisitDate": noteSiteVisitDate,
+          "noteText": noteText,
+          "noteType": noteType
         }
-      self.handleDatabase(noteInfo);
+
+        return noteInfo;
     },
     handleDatabase: function (userInfo) { // adds info to DB
       var self=this;
