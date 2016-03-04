@@ -329,6 +329,13 @@ var pageFunctions = {
         noteSiteVisitDateEl.innerHTML = '<strong>Site Visit Date:</strong> ' + date;
         noteContent.insertBefore(noteSiteVisitDateEl, noteTextEl);
       }
+    },
+    handleEditButton: function(key) {
+      var editButton = document.getElementById('edit-button');
+      editButton.addEventListener('click', function(){
+        window.location.href = 'record_edit.html?key=' + key;
+      });
+    },
 
     },
     fixDate: function (date) {
