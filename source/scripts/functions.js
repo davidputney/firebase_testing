@@ -63,7 +63,6 @@ var pageFunctions = {
         mm='0'+mm
       }
       var dateSet = (yyyy + '-' + mm + '-' + dd);
-
         datePicker.value = dateSet;
         meetingDatePicker.value = dateSet;
     },
@@ -125,9 +124,12 @@ var pageFunctions = {
       var noteMeetingDateSelect = document.getElementsByName('meeting-date')[0];
       var noteSiteVisitDateSelect = document.getElementsByName('site-visit-date')[0];
 
+      var noteText = document.getElementsByName('note-text')[0].value;
+
+
       var noteType = document.getElementsByName('note-type')[0].value;
       var noteDate = document.getElementsByName('date')[0].value;
-      var noteText = document.getElementsByName('note-text')[0].value;
+
 
       var noteDealIssues = !noteDealIssuesSelect.disabled
         ? noteDealIssuesSelect.value
