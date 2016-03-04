@@ -343,6 +343,9 @@ var pageFunctions = {
       var self=this;
       var editButton = document.getElementById('submit');
       editButton.addEventListener('click', function(){
+      self.handleDatabaseEdit(key);
+      });
+    },
     handlePostingModal: function(state, key) {
       var self=this;
 
