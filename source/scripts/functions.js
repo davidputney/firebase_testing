@@ -270,8 +270,20 @@ var pageFunctions = {
 
         dataCellNoteType.innerHTML = dataItem.noteType;
         dataCellNoteText.innerHTML = dataItem.noteText;
-        dataCellNoteDealIssues.innerHTML = dataItem.noteDealIssues;
-        dataCellNoteDiscussionPoints.innerHTML = dataItem.noteDiscussionPoints;
+        // dataCellNoteDealIssues.innerHTML = dataItem.noteDealIssues;
+
+
+        if (dataItem.noteDiscussionPoints === false) {
+          dataCellNoteDiscussionPoints.innerHTML = "";
+        } else {
+          dataCellNoteDiscussionPoints.innerHTML = dataItem.noteDiscussionPoints;
+        }
+        if (dataItem.noteDealIssues === false) {
+          dataCellNoteDealIssues.innerHTML = "";
+        } else {
+          dataCellNoteDealIssues.innerHTML = dataItem.noteDealIssues;
+        }
+
 
         var noteDisplay = [dataCellDate, dataCellNoteType, dataCellNoteText, dataCellNoteDealIssues,  dataCellNoteDiscussionPoints];
 
