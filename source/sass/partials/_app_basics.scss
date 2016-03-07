@@ -75,8 +75,11 @@ td, th {
   align-items: center;
   justify-content: center;
   display:none;
+  flex-direction:column;
     h2 {
       text-align:center;
+      flex-shrink: 0;
+      width:100%;
     }
 }
 .posting-modal--active {
@@ -91,4 +94,13 @@ td, th {
 .note-create {
   max-width:rem(1200);
   margin:rem(20) auto;
+}
+input[type=button] {
+  min-width:rem(130);
+}
+.btn-gray {
+  background-color: $med !important;
+  &:hover {
+    background-color: $dark !important;
+  }
 }
