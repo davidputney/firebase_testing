@@ -253,6 +253,8 @@ var pageFunctions = {
       });
 
       function buildResults (dataItem) {
+
+
         var tableRow = document.createElement("TR");
         var table = document.getElementById('results-table');
         var dataCellDate = document.createElement("TD");
@@ -303,6 +305,7 @@ var pageFunctions = {
         if (pageType === 'note-read') {
           self.buildSingleRecordPage(snapshot.val());
           self.handleEditButton(snapshot.key());
+          self.handleEditDeleteButton(snapshot.key());
         }
         if (pageType === 'note-edit') {
           self.handleNoteEditDisplay(snapshot.val());
