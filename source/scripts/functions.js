@@ -192,6 +192,21 @@ var pageFunctions = {
         }
       });
     },
+    handleDatabaseRemove: function (key) {
+      var self=this;
+      // self.handlePostingModal(true);
+      var ref = new Firebase('https://putneydbtest.firebaseio.com/notes');
+
+      var updateRef = ref.child(key);
+      updateRef.remove(function(error) {
+        if (error) {
+            console.log("Data could not be saved." + error);
+        } else {
+          console.log("Data saved successfully.");
+          // self.handlePostingModal(false, key);
+        }
+      });
+    },
     retrieveDatabase: function () { //gets info from DB
       var self=this;
       console.log('retrieveDatabase');
