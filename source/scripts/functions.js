@@ -373,6 +373,32 @@ var pageFunctions = {
       self.handleDatabaseEdit(key);
       });
     },
+    handleEditDeleteButton: function(key) {
+      var self=this;
+      console.log('handleEditButton');
+      var deleteButton = document.getElementById('delete-button');
+      var confirmButton = document.getElementById('confirm-delete');
+      var cancelButton = document.getElementById('cancel-delete');
+      var  editButton = document.getElementById('edit-button');
+      deleteButton.addEventListener('click', function(){
+        deleteButton.disabled = true;
+        editButton.disabled = true;
+        self.handlePostingModal(true);
+      });
+      confirmButton.addEventListener('click', function() {
+        console.log('confirm');
+        self.handleDatabaseRemove(key);
+        self.handlePostingModal(false, false);
+      });
+      cancelButton.addEventListener('click', function() {
+        console.log('cancel');
+        var postingModal = document.getElementById('posting-modal');
+        postingModal.classList.remove('posting-modal--active');
+        deleteButton.disabled = false;
+        editButton.disabled = false;
+      });
+
+    },
     handlePostingModal: function(state, key) {
       var self=this;
 
