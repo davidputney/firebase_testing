@@ -407,11 +407,17 @@ var pageFunctions = {
       if (state === true) {
         postingModal.classList.add('posting-modal--active');
       }
-      if (state === false) {
+      if (state === false  && key) {
         setTimeout(function(){
           postingModal.classList.remove('posting-modal--active');
           window.location.href = 'record.html?key=' + key;
         }, 1000);
+      }
+      if (state === false  && !key) {
+        setTimeout(function(){
+          postingModal.classList.remove('posting-modal--active');
+          window.location.href = 'record_history.html';
+        }, 400);
       }
     },
     handleNoteEditDisplay: function(entryData) {
