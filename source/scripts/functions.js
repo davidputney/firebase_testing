@@ -12,6 +12,7 @@ var pageFunctions = {
       // self.getForms();
       self.dateSetter();
       self.noteTypeSetter();
+      self.initializeMultiSelect(".js-example-basic-multiple");
     },
     intializeHistory: function(){
       var self=this;
