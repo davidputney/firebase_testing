@@ -21,35 +21,33 @@
   <textarea id="note-text" name="note-text"></textarea>
   <div class="spacer-1"></div>
 
-    <label>Deal issues</label>
-    <input list="deal-issues" name="deal-issues" /></label>
-    <datalist id="deal-issues">
-      <option value="Bad Debt (BD)">
-      <option value="Debt Coverage Ratio < 1.0 (DC)">
-      <option value="Delinquent Mortgage Payments (DM)">
-      <option value="Delinquent Taxes (DT)">
-      <option value="Distribution not Received (DR)">
-      <option value="Excessive Tenant Account Receivables (AR)">
-      <option value="Excessive Tenant Account Receivables (AR)">
-      <option value="GP Advances and Fees Accruing Interest (IA)">
-      <option value="Going Concern Opinion (OP)">
-      <option value="High Debt Service (DS)">
-      <option value="High Operating Expense (EX)">
-      <option value="High Payables Or Accrued Expenses (HP)">
-      <option value="Improper Distribution (ID)">
-    </datalist>
+  <label>Deal issues</label>
+    <select class="js-example-basic-multiple deal-issues-multi" multiple="multiple" name="deal-issues">
+      <option value="BD">Bad Debt (BD)</option>
+      <option value="DC">Debt Coverage Ratio < 1.0 (DC)</option>
+      <option value="DM">Delinquent Mortgage Payments (DM)</option>
+      <option value="DT">Delinquent Taxes (DT)</option>
+      <option value="DR">Distribution not Received (DR)</option>
+      <option value="AR">Excessive Tenant Account Receivables (AR)</option>
+      <option value="IA">GP Advances and Fees Accruing Interest (IA)</option>
+      <option value="OP">Going Concern Opinion (OP)</option>
+      <option value="DS">High Debt Service (DS)</option>
+      <option value="EX">High Operating Expense (EX)</option>
+      <option value="HP">High Payables Or Accrued Expenses (HP)</option>
+      <option value="ID">Improper Distribution (ID)</option>
+    </select>
 
+    <div class="spacer-2"></div>
     <div class="optional-form form-active">
       <label>Discussion points</label>
-      <input list="discussion-points" name="discussion-points" /></label>
-      <datalist id="discussion-points">
-        <option value="Add to Watchlist">
-        <option value="Remove from Watchlist">
-        <option value="Adjust Watch Level">
-        <option value="Change Meeting Frequency">
-        <option value="Add Issues(s)">
-        <option value="Resolve Issues(s)">
-      </datalist>
+      <select class="js-example-basic-multiple discussion-points-multi" multiple="multiple" name="discussion-points">
+        <option value="Add to Watchlist">Add to Watchlist</option>
+        <option value="Remove from Watchlist">Remove from Watchlist</option>
+        <option value="Adjust Watch Level">Adjust Watch Level</option>
+        <option value="Change Meeting Frequency">Change Meeting Frequency</option>
+        <option value="Add Issues(s)">Add Issues(s)</option>
+        <option value="Resolve Issues(s)">Resolve Issues(s)</option>
+      </select>
     </div>
 
     <div class="optional-form">
