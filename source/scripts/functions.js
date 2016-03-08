@@ -362,7 +362,7 @@ var pageFunctions = {
 
       noteHedlineEl.innerHTML = entry.noteType + ' Note';
       noteDateEl.innerHTML = '<strong>Note Date:</strong> ' + noteDate;
-      noteDealIssuesEl.innerHTML = '<strong>Deal issues:</strong> ' + entry.noteDealIssues;
+      noteDealIssuesEl.innerHTML = '<strong>Deal issues:</strong> ' + entry.noteDealIssues.join(', ');
       noteTextEl.innerHTML = '<strong>Note text:</strong> ' + entry.noteText;
 
       noteContainer.insertBefore(noteHedlineEl, metaData);
