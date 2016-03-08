@@ -31,9 +31,12 @@ var pageFunctions = {
       var key = self.getNoteKey();
       self.retrieveDatabaseNote(key);
     },
-    initializeMultiSelect: function(el) {
+    initializeMultiSelect: function(el, plText) {
       var self=this;
-      $(el).select2();
+      $(el).select2({
+        placeholder: plText,
+        allowClear: true
+      });
     },
     initializeMultiSelectEdit: function(arr, field) {
       var self=this;
