@@ -6,10 +6,12 @@ var pageFunctions = {
       var self=this;
       this.intializeDatabase();
     },
+    /*
+    PAGE INITIALIZERS
+    */
     initializeIndex: function(){
       var self=this;
       this.intializeWatchers(); //listens for clicks
-      // self.getForms();
       self.dateSetter();
       self.noteTypeSetter();
       self.initializeMultiSelect(".js-example-basic-multiple");
@@ -34,7 +36,6 @@ var pageFunctions = {
       $(el).select2();
     },
     initializeMultiSelectEdit: function(arr, field) {
-
       var self=this;
       var multiselect = document.getElementsByClassName(field)[0];
 
@@ -51,17 +52,17 @@ var pageFunctions = {
       }
       $('.' + field).select2();
     },
-    intializeWatchers: function () {
+    /*
+    OTHER INITIALIZERS
+    */
+    intializeWatchers: function() {
       var self=this;
       var button = document.getElementById('submit');
       var notePicker = document.getElementsByName('note-type')[0];
       button.addEventListener('click', function() {
-        console.log('click');
-        // self.getForms();
         self.handleDatabase();
       });
       notePicker.addEventListener('change', function() {
-        console.log('blur');
         self.handleNoteTypeChanges(notePicker.value);
       });
     },
@@ -69,34 +70,11 @@ var pageFunctions = {
       var self=this;
       console.log('db intialize');
       var ref = new Firebase('https://putneydbtest.firebaseio.com/');
-
       self.database = ref;
     },
-    dateSetter: function() {
-      var datePicker = document.getElementsByName('date')[0];
-      var meetingDatePicker = document.getElementsByName("meeting-date")[0];
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth()+1; //January is 0!
-      var yyyy = today.getFullYear();
-      if(dd<10) {
-        dd='0'+dd
-      }
-      if(mm<10) {
-        mm='0'+mm
-      }
-      var dateSet = (yyyy + '-' + mm + '-' + dd);
-        datePicker.value = dateSet;
-        meetingDatePicker.value = dateSet;
-    },
-    noteTypeSetter: function () {
-      var self=this;
-      var noteType = self.getNoteKey();
-      self.handleNoteTypeChanges(noteType);
-
-      var noteTypePicker =document.getElementsByName('note-type')[0];
-      noteTypePicker.value = noteType;
-    },
+    /*
+    NOTE CREATION
+    */
     handleNoteCreate: function() {
       var self=this;
       var notePicker= document.getElementById('note-type-create');
@@ -108,29 +86,25 @@ var pageFunctions = {
         }, 300);
       });
     },
-    handleNoteTypeChanges: function (noteType) {
+    handleNoteTypeChanges: function(noteType) {
       var self=this;
-      console.log(noteType);
-      handleDisable();
+      handleNoteFieldsDisable();
 
       if (noteType === "previsit" || noteType === "followup") {
         var siteVisitDate = document.getElementsByName('site-visit-date')[0];
         handleSiteVisit(siteVisitDate);
-      }
-      if (noteType === "deal_issues") {
-        var siteVisitDate = document.getElementsByName('meeting-date')[0];
-        handleSiteVisit(siteVisitDate);
-      }
-      if (noteType === "general") {
+      } else if (noteType === "deal_issues") {
+        var meetingDate = document.getElementsByName('meeting-date')[0];
+        handleSiteVisit(meetingDate);
+      } else if (noteType === "general") {
         var discussionPoints = document.getElementsByName('discussion-points')[0];
         handleSiteVisit(discussionPoints);
       }
       function handleSiteVisit (el) {
           el.disabled = false;
           el.parentNode.classList.add('form-active');
-          // .classList.add("form-active");
       }
-      function handleDisable () {
+      function handleNoteFieldsDisable() {
         var active = [].slice.call(document.querySelectorAll(".form-active"));
         active.forEach(function(el) {
           el.classList.remove('form-active');
@@ -146,7 +120,6 @@ var pageFunctions = {
       var noteDiscussionPointsSelect = document.getElementsByName('discussion-points')[0];
       var noteMeetingDateSelect = document.getElementsByName('meeting-date')[0];
       var noteSiteVisitDateSelect = document.getElementsByName('site-visit-date')[0];
-
       var noteText = document.getElementsByName('note-text')[0].value;
 
       var dealIssuesMulti = noteDealIssuesSelect.selectedOptions;
@@ -154,24 +127,20 @@ var pageFunctions = {
       for (i = 0; i < dealIssuesMulti.length; i++) {
           dealIssuesArr.push(dealIssuesMulti[i].value);
       }
-
       var discussionPointsMulti = noteDiscussionPointsSelect.selectedOptions;
       var discussionPointsArr = [];
       for (i = 0; i < discussionPointsMulti.length; i++) {
           discussionPointsArr.push(discussionPointsMulti[i].value);
       }
-
       var noteType = document.getElementsByName('note-type')[0].value;
       var noteDate = document.getElementsByName('date')[0].value;
 
       var noteDealIssues = !noteDealIssuesSelect.disabled
         ? dealIssuesArr
         : false;
-
       var noteDiscussionPoints = !noteDiscussionPointsSelect.disabled
         ? discussionPointsArr
         : false;
-
       var noteMeetingDate = !noteMeetingDateSelect.disabled
         ? noteMeetingDateSelect.value
         : false;
@@ -179,7 +148,6 @@ var pageFunctions = {
       var noteSiteVisitDate = !noteSiteVisitDateSelect.disabled
         ? noteSiteVisitDateSelect.value
         : false;
-
        var noteInfo =
         {
           "noteDate": noteDate,
@@ -189,16 +157,19 @@ var pageFunctions = {
           "noteSiteVisitDate": noteSiteVisitDate,
           "noteText": noteText,
           "noteType": noteType
-        }
+        };
         return noteInfo;
     },
-    handleDatabase: function (userInfo) { // adds info to DB
+    /*
+    ADD INFO TO DB
+    */
+    handleDatabase: function () { // adds info to DB
       var self=this;
       var userInfo = self.getForms();
       self.handlePostingModal(true);
-      var ref=self.database;
-      var usersRef = ref.child("notes");
-      var newPostRef = usersRef.push(userInfo, function(error) {
+      var ref = new Firebase('https://putneydbtest.firebaseio.com/');
+      var notesRef = ref.child("notes");
+      var newPostRef = notesRef.push(userInfo, function(error) {
         var postID = newPostRef.key();
         if (error) {
             console.log("Data could not be saved." + error);
@@ -208,43 +179,15 @@ var pageFunctions = {
         }
       });
     },
-    handleDatabaseEdit: function (key) {
-      var self=this;
-      var userInfo = self.getForms();
-      self.handlePostingModal(true);
-      var ref = new Firebase('https://putneydbtest.firebaseio.com/notes');
-
-      var updateRef = ref.child(key);
-      updateRef.update(userInfo, function(error) {
-        if (error) {
-            console.log("Data could not be saved." + error);
-        } else {
-          console.log("Data saved successfully.");
-          self.handlePostingModal(false, key);
-        }
-      });
-    },
-    handleDatabaseRemove: function (key) {
-      var self=this;
-      // self.handlePostingModal(true);
-      var ref = new Firebase('https://putneydbtest.firebaseio.com/notes');
-
-      var updateRef = ref.child(key);
-      updateRef.remove(function(error) {
-        if (error) {
-            console.log("Data could not be saved." + error);
-        } else {
-          console.log("Data saved successfully.");
-          // self.handlePostingModal(false, key);
-        }
-      });
-    },
+    /*
+    GET INFO FROM DB
+    */
     retrieveDatabase: function () { //gets info from DB
       var self=this;
       console.log('retrieveDatabase');
       var ref=self.database;
       var usersRef = ref.child("notes");
-      var bar = []
+      var bar = [];
 
       usersRef.orderByChild("date").on("value", function(snapshot) {
         snapshot.forEach(function(data, i) {
@@ -258,71 +201,13 @@ var pageFunctions = {
             "noteDiscussionPoints": data.val().noteDiscussionPoints,
             "noteSiteVisitDate": data.val().noteSiteVisitDate,
             "noteMeetingDate": data.val().noteMeetingDate
-          }
+          };
           bar.push(fooBar);
         });
-        // console.log(bar);
         self.handleTableData(bar);
       }, function (errorObject) {
         console.log("The read failed: " + errorObject.code);
       });
-    },
-    handleTableData: function(arr) {
-      var self=this;
-
-      var notesSorted =  arr.sort(function(a,b){
-          // console.log('a', a);
-          var c = new Date(a.noteDate);
-          var d = new Date(b.noteDate);
-          return c-d;
-        });
-      notesSorted.reverse();
-      notesSorted.forEach(function (el) {
-      buildResults(el)
-    });
-
-      function buildResults (dataItem) {
-
-
-        var tableRow = document.createElement("TR");
-        var table = document.getElementById('results-table');
-        var dataCellDate = document.createElement("TD");
-        var dataCellNoteType = document.createElement("TD");
-        var dataCellNoteText = document.createElement("TD");
-        var dataCellNoteDealIssues = document.createElement("TD");
-        var dataCellNoteDiscussionPoints = document.createElement("TD");
-
-        var date = self.fixDate(dataItem.noteDate);
-
-        var a = document.createElement('A');
-            a.href = 'record.html?key=' + dataItem.key;
-            a.innerHTML = date;
-            dataCellDate.appendChild(a);
-
-        dataCellNoteType.innerHTML = dataItem.noteType;
-        dataCellNoteText.innerHTML = dataItem.noteText;
-        // dataCellNoteDealIssues.innerHTML = dataItem.noteDealIssues;
-
-
-        if (dataItem.noteDiscussionPoints === false) {
-          dataCellNoteDiscussionPoints.innerHTML = "";
-        } else {
-          dataCellNoteDiscussionPoints.innerHTML = dataItem.noteDiscussionPoints.join(', ');
-        }
-        if (dataItem.noteDealIssues === false) {
-          dataCellNoteDealIssues.innerHTML = "";
-        } else {
-          dataCellNoteDealIssues.innerHTML = dataItem.noteDealIssues.join(', ');
-        }
-
-
-        var noteDisplay = [dataCellDate, dataCellNoteType, dataCellNoteText, dataCellNoteDealIssues,  dataCellNoteDiscussionPoints];
-
-        noteDisplay.forEach(function(el) {
-          tableRow.appendChild(el);
-        });
-        table.appendChild(tableRow);
-        }
     },
     retrieveDatabaseNote: function(key) {
       var self=this;
@@ -342,28 +227,106 @@ var pageFunctions = {
         }
       });
     },
+    /*
+    ALTER INFORMATION IN DB
+    */
+    handleDatabaseEdit: function (key) {
+      var self=this;
+      var userInfo = self.getForms();
+      self.handlePostingModal(true);
+      var ref = new Firebase('https://putneydbtest.firebaseio.com/notes');
+
+      var updateRef = ref.child(key);
+      updateRef.update(userInfo, function(error) {
+        if (error) {
+            console.log("Data could not be saved." + error);
+        } else {
+          console.log("Data saved successfully.");
+          self.handlePostingModal(false, key);
+        }
+      });
+    },
+    handleDatabaseRemove: function (key) {
+      var self=this;
+      var ref = new Firebase('https://putneydbtest.firebaseio.com/notes');
+
+      var updateRef = ref.child(key);
+      updateRef.remove(function(error) {
+        if (error) {
+            console.log("Data could not be saved." + error);
+        } else {
+          console.log("Data saved successfully.");
+        }
+      });
+    },
+    /*
+    DISPLAY INFORMATION
+    */
+    handleTableData: function(arr) {
+      var self=this;
+
+      var notesSorted =  arr.sort(function(a,b){
+          // console.log('a', a);
+          var c = new Date(a.noteDate);
+          var d = new Date(b.noteDate);
+          return c-d;
+        });
+      notesSorted.reverse();
+      notesSorted.forEach(function (el) {
+      buildResults(el);
+    });
+      function buildResults (dataItem) {
+        var tableRow = document.createElement("TR");
+        var table = document.getElementById('results-table');
+        var dataCellDate = document.createElement("TD");
+        var dataCellNoteType = document.createElement("TD");
+        var dataCellNoteText = document.createElement("TD");
+        var dataCellNoteDealIssues = document.createElement("TD");
+        var dataCellNoteDiscussionPoints = document.createElement("TD");
+
+        var date = self.fixDate(dataItem.noteDate);
+
+        var a = document.createElement('A');
+            a.href = 'record.html?key=' + dataItem.key;
+            a.innerHTML = date;
+            dataCellDate.appendChild(a);
+
+        dataCellNoteType.innerHTML = dataItem.noteType;
+        dataCellNoteText.innerHTML = dataItem.noteText;
+
+        !dataItem.noteDiscussionPoints
+          ? dataCellNoteDiscussionPoints.innerHTML = ""
+          : dataCellNoteDiscussionPoints.innerHTML = dataItem.noteDiscussionPoints.join(', ');
+
+        !dataItem.noteDealIssues
+          ? dataCellNoteDealIssues.innerHTML = ""
+          : dataCellNoteDealIssues.innerHTML = dataItem.noteDealIssues.join(', ');
+
+        var noteDisplay = [dataCellDate, dataCellNoteType, dataCellNoteText, dataCellNoteDealIssues,  dataCellNoteDiscussionPoints];
+
+        noteDisplay.forEach(function(el) {
+          tableRow.appendChild(el);
+        });
+        table.appendChild(tableRow);
+        }
+    },
     buildSingleRecordPage: function(entry) {
       var self=this;
 
-      console.log(entry);
-
       var noteDate = self.fixDate(entry.noteDate);
-
       var noteContainer = document.getElementById('note-wrapper');
       var metaData = document.getElementById('metadata-wrapper');
-      var noteContent = document.getElementById('note-content')
-
+      var noteContent = document.getElementById('note-content');
       var noteHedlineEl = document.createElement('H1');
       noteHedlineEl.classList.add('note-headline');
       var noteDateEl = document.createElement("P");
       var noteDealIssuesEl = document.createElement('P');
       var noteTextEl = document.createElement('P');
 
-
-      noteHedlineEl.innerHTML = entry.noteType + ' Note';
+      noteHedlineEl.innerHTML = entry.noteType.replace(/_/i, ' '); + ' Note';
       noteDateEl.innerHTML = '<strong>Note Date:</strong> ' + noteDate;
-      noteDealIssuesEl.innerHTML = '<strong>Deal issues:</strong> ' + entry.noteDealIssues.join(', ');
-      noteTextEl.innerHTML = '<strong>Note text:</strong> ' + entry.noteText;
+      noteDealIssuesEl.innerHTML = '<strong>Deal Issues:</strong> ' + entry.noteDealIssues.join(', ');
+      noteTextEl.innerHTML = '<strong>Note Text:</strong> ' + entry.noteText;
 
       noteContainer.insertBefore(noteHedlineEl, metaData);
       metaData.appendChild(noteDateEl);
@@ -384,14 +347,70 @@ var pageFunctions = {
       }
       if (entry.noteType === 'previsit' || entry.noteType === 'followup') {
         var date = !"undefined"
-        ? self.fixDate(entry.noteSiteVisitDate)
-        : entry.noteSiteVisitDate
+          ? self.fixDate(entry.noteSiteVisitDate)
+          : entry.noteSiteVisitDate;
 
         var noteSiteVisitDateEl = document.createElement('P');
         noteSiteVisitDateEl.innerHTML = '<strong>Site Visit Date:</strong> ' + date;
         noteContent.insertBefore(noteSiteVisitDateEl, noteTextEl);
       }
     },
+    handleNoteEditDisplay: function(entryData) {
+      var self=this;
+      self.handleNoteTypeChanges(entryData.noteType);
+
+      var noteDealIssuesSelect = document.getElementsByName('deal-issues')[0];
+      var noteDateSelect = document.getElementsByName('date')[0];
+      var noteTextSelect = document.getElementsByName('note-text')[0];
+      var noteTypeSelect = document.getElementsByName('note-type')[0];
+
+      noteDateSelect.value = entryData.noteDate;
+      noteTextSelect.value = entryData.noteText;
+      noteTypeSelect.value = entryData.noteType;
+
+      //  handles loading of multiselect data
+      self.initializeMultiSelectEdit(entryData.noteDealIssues, "deal-issues-multi");
+
+      // optional data fields
+      if (entryData.noteType === 'general') {
+        self.initializeMultiSelectEdit(entryData.noteDiscussionPoints, "discussion-points-multi");
+      }
+      else if (entryData.noteType === 'deal_issues') {
+        var noteMeetingDateSelect = document.getElementsByName('meeting-date')[0];
+        noteMeetingDateSelect.value = entryData.noteMeetingDate;
+      }
+      else if (entryData.noteType === "previsit" || entryData.noteType === "followup") {
+        var noteSiteVisitDateSelect = document.getElementsByName('site-visit-date')[0];
+        noteSiteVisitDateSelect.value = entryData.noteSiteVisitDate;
+      }
+    },
+    /*
+    MODALS
+    */
+    handlePostingModal: function(state, key) {
+      var self=this;
+
+      var postingModal = document.getElementById('posting-modal');
+
+      if (state === true) {
+        postingModal.classList.add('posting-modal--active');
+      }
+      else if (state === false  && key) {
+        setTimeout(function(){
+          postingModal.classList.remove('posting-modal--active');
+          window.location.href = 'record.html?key=' + key;
+        }, 1000);
+      }
+      else if (state === false  && !key) {
+        setTimeout(function(){
+          postingModal.classList.remove('posting-modal--active');
+          window.location.href = 'record_history.html';
+        }, 400);
+      }
+    },
+    /*
+    BUTTON HANDLERS
+    */
     handleEditButton: function(key) {
       var editButton = document.getElementById('edit-button');
       editButton.addEventListener('click', function(){
@@ -415,77 +434,22 @@ var pageFunctions = {
       deleteButton.addEventListener('click', function(){
         deleteButton.disabled = true;
         editButton.disabled = true;
-        self.handlePostingModal(true);
+        self.handlePostingModal(true, false);
       });
       confirmButton.addEventListener('click', function() {
-        console.log('confirm');
         self.handleDatabaseRemove(key);
         self.handlePostingModal(false, false);
       });
       cancelButton.addEventListener('click', function() {
-        console.log('cancel');
         var postingModal = document.getElementById('posting-modal');
         postingModal.classList.remove('posting-modal--active');
         deleteButton.disabled = false;
         editButton.disabled = false;
       });
-
     },
-    handlePostingModal: function(state, key) {
-      var self=this;
-
-      var postingModal = document.getElementById('posting-modal');
-
-      if (state === true) {
-        postingModal.classList.add('posting-modal--active');
-      }
-      if (state === false  && key) {
-        setTimeout(function(){
-          postingModal.classList.remove('posting-modal--active');
-          window.location.href = 'record.html?key=' + key;
-        }, 1000);
-      }
-      if (state === false  && !key) {
-        setTimeout(function(){
-          postingModal.classList.remove('posting-modal--active');
-          window.location.href = 'record_history.html';
-        }, 400);
-      }
-    },
-    handleNoteEditDisplay: function(entryData) {
-      var self=this;
-
-      self.handleNoteTypeChanges(entryData.noteType);
-
-      var noteDealIssuesSelect = document.getElementsByName('deal-issues')[0];
-      var noteDateSelect = document.getElementsByName('date')[0];
-      var noteTextSelect = document.getElementsByName('note-text')[0];
-      var noteTypeSelect = document.getElementsByName('note-type')[0];
-
-
-      noteDateSelect.value = entryData.noteDate;
-      noteTextSelect.value = entryData.noteText;
-      noteTypeSelect.value = entryData.noteType;
-
-      //  handles loading of multiselect data
-      self.initializeMultiSelectEdit(entryData.noteDealIssues, "deal-issues-multi");
-
-
-      console.log(entryData.noteDiscussionPoints);
-      // optional data fields
-      if (entryData.noteType === 'general') {
-        self.initializeMultiSelectEdit(entryData.noteDiscussionPoints, "discussion-points-multi");
-
-      }
-      if (entryData.noteType === 'deal_issues') {
-        var noteMeetingDateSelect = document.getElementsByName('meeting-date')[0];
-        noteMeetingDateSelect.value = entryData.noteMeetingDate;
-      }
-      if (entryData.noteType === "previsit" || entryData.noteType === "followup") {
-        var noteSiteVisitDateSelect = document.getElementsByName('site-visit-date')[0];
-        noteSiteVisitDateSelect.value = entryData.noteSiteVisitDate;
-      }
-    },
+    /*
+    UTILITIES
+    */
     fixDate: function (date) {
       var rawDate = new Date(date);
       var resetDate = (rawDate.getMonth() + 1) + "/" + (rawDate.getDate() + 1) + "/" + rawDate.getFullYear();
@@ -495,6 +459,30 @@ var pageFunctions = {
       var self=this;
       console.log('getNoteKey');
          var url = window.location.search.substring(1).split('=')[1];
-         return url
+         return url;
+    },
+    dateSetter: function() {
+      var datePicker = document.getElementsByName('date')[0];
+      var meetingDatePicker = document.getElementsByName("meeting-date")[0];
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+      if(dd<10) {
+        dd='0'+dd;
+      }
+      if(mm<10) {
+        mm='0'+mm;
+      }
+      var dateSet = (yyyy + '-' + mm + '-' + dd);
+        datePicker.value = dateSet;
+        meetingDatePicker.value = dateSet;
+    },
+    noteTypeSetter: function () {
+      var self=this;
+      var noteType = self.getNoteKey();
+      self.handleNoteTypeChanges(noteType);
+      var noteTypePicker = document.getElementsByName('note-type')[0];
+      noteTypePicker.value = noteType;
     }
   };
