@@ -189,7 +189,6 @@ var pageFunctions = {
           "noteText": noteText,
           "noteType": noteType
         }
-
         return noteInfo;
     },
     handleDatabase: function (userInfo) { // adds info to DB
