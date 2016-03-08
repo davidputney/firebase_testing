@@ -373,7 +373,7 @@ var pageFunctions = {
       // optional note types
       if (entry.noteType === 'general'){
         var noteDiscussionPointsEl = document.createElement('P');
-        noteDiscussionPointsEl.innerHTML = '<strong>Discussion Points:</strong> ' + entry.noteDiscussionPoints;
+        noteDiscussionPointsEl.innerHTML = '<strong>Discussion Points:</strong> ' + entry.noteDiscussionPoints.join(', ');
         noteContent.insertBefore(noteDiscussionPointsEl, noteTextEl);
       }
       if (entry.noteType === 'deal_issues') {
@@ -465,13 +465,17 @@ var pageFunctions = {
 
       noteDateSelect.value = entryData.noteDate;
       noteTextSelect.value = entryData.noteText;
-      noteDealIssuesSelect.value = entryData.noteDealIssues;
       noteTypeSelect.value = entryData.noteType;
 
+      //  handles loading of multiselect data
+      self.initializeMultiSelectEdit(entryData.noteDealIssues, "deal-issues-multi");
+
+
+      console.log(entryData.noteDiscussionPoints);
       // optional data fields
       if (entryData.noteType === 'general') {
-        var noteDiscussionPointsSelect = document.getElementsByName('discussion-points')[0];
-        noteDiscussionPointsSelect.value = entryData.noteDiscussionPoints;
+        self.initializeMultiSelectEdit(entryData.noteDiscussionPoints, "discussion-points-multi");
+
       }
       if (entryData.noteType === 'deal_issues') {
         var noteMeetingDateSelect = document.getElementsByName('meeting-date')[0];
