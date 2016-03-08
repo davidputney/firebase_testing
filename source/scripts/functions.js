@@ -163,13 +163,12 @@ var pageFunctions = {
       var noteType = document.getElementsByName('note-type')[0].value;
       var noteDate = document.getElementsByName('date')[0].value;
 
-
       var noteDealIssues = !noteDealIssuesSelect.disabled
-        ? noteDealIssuesSelect.value
+        ? dealIssuesArr
         : false;
 
       var noteDiscussionPoints = !noteDiscussionPointsSelect.disabled
-        ? noteDiscussionPointsSelect.value
+        ? discussionPointsArr
         : false;
 
       var noteMeetingDate = !noteMeetingDateSelect.disabled
