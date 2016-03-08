@@ -32,6 +32,24 @@ var pageFunctions = {
       var self=this;
       $(el).select2();
     },
+    initializeMultiSelectEdit: function(arr, field) {
+
+      var self=this;
+      var multiselect = document.getElementsByClassName(field)[0];
+
+      if (arr.length !== 0) {
+        var optionsList = multiselect.options;
+        var i;
+        for (i = 0; i < optionsList.length; i++) {
+          arr.forEach(function(el) {
+              if (optionsList[i].value === el) {
+                optionsList[i].selected = true;
+              }
+            });
+        }
+      }
+      $('.' + field).select2();
+    },
     intializeWatchers: function () {
       var self=this;
       var button = document.getElementById('submit');
