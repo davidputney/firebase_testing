@@ -14,7 +14,7 @@ var pageFunctions = {
       this.intializeWatchers(); //listens for clicks
       self.dateSetter();
       self.noteTypeSetter();
-      self.initializeMultiSelect(".js-example-basic-multiple");
+      self.initializeMultiSelect(".deal-issues-multi", "Add deal Issues");
     },
     intializeHistory: function(){
       var self=this;
@@ -99,6 +99,7 @@ var pageFunctions = {
       } else if (noteType === "general") {
         var discussionPoints = document.getElementsByName('discussion-points')[0];
         handleSiteVisit(discussionPoints);
+        self.initializeMultiSelect(".discussion-points-multi", "Add discussion points");
       }
       function handleSiteVisit (el) {
           el.disabled = false;
