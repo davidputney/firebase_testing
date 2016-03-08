@@ -148,6 +148,17 @@ var pageFunctions = {
 
       var noteText = document.getElementsByName('note-text')[0].value;
 
+      var dealIssuesMulti = noteDealIssuesSelect.selectedOptions;
+      var dealIssuesArr = [];
+      for (i = 0; i < dealIssuesMulti.length; i++) {
+          dealIssuesArr.push(dealIssuesMulti[i].value);
+      }
+
+      var discussionPointsMulti = noteDiscussionPointsSelect.selectedOptions;
+      var discussionPointsArr = [];
+      for (i = 0; i < discussionPointsMulti.length; i++) {
+          discussionPointsArr.push(discussionPointsMulti[i].value);
+      }
 
       var noteType = document.getElementsByName('note-type')[0].value;
       var noteDate = document.getElementsByName('date')[0].value;
