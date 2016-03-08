@@ -28,6 +28,10 @@ var pageFunctions = {
       var key = self.getNoteKey();
       self.retrieveDatabaseNote(key);
     },
+    initializeMultiSelect: function(el) {
+      var self=this;
+      $(el).select2();
+    },
     intializeWatchers: function () {
       var self=this;
       var button = document.getElementById('submit');
