@@ -276,13 +276,10 @@ var pageFunctions = {
           var d = new Date(b.noteDate);
           return c-d;
         });
-
       notesSorted.reverse();
-
       notesSorted.forEach(function (el) {
-        // console.log(el);
-        buildResults(el)
-      });
+      buildResults(el)
+    });
 
       function buildResults (dataItem) {
 
