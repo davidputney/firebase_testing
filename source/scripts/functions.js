@@ -307,12 +307,12 @@ var pageFunctions = {
         if (dataItem.noteDiscussionPoints === false) {
           dataCellNoteDiscussionPoints.innerHTML = "";
         } else {
-          dataCellNoteDiscussionPoints.innerHTML = dataItem.noteDiscussionPoints;
+          dataCellNoteDiscussionPoints.innerHTML = dataItem.noteDiscussionPoints.join(', ');
         }
         if (dataItem.noteDealIssues === false) {
           dataCellNoteDealIssues.innerHTML = "";
         } else {
-          dataCellNoteDealIssues.innerHTML = dataItem.noteDealIssues;
+          dataCellNoteDealIssues.innerHTML = dataItem.noteDealIssues.join(', ');
         }
 
 
