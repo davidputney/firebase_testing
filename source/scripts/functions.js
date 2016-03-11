@@ -506,6 +506,77 @@ var pageFunctions = {
       // clears values out of multiselect
       $(".js-example-basic-multiple").val(null).trigger("change");
     },
+    handlePropertyStatusChange: function (currentStatus) {
+      var self=this;
+
+      var changeLog = [];
+      var dealIssuesArr = [];
+      var statusUpdate = currentStatus;
+
+      var saveChangesBtn = document.getElementsByName('save-changes')[0];
+      var cancelChangesBtn = document.getElementsByName('cancel-update')[0];
+      var eventSelect = document.getElementsByName('deal-issues')[0];
+      var effectiveDateForm = document.getElementsByName('effective-date')[0];
+      var watchLevelForm = document.getElementsByName('watch-level')[0];
+      var meetingFrequencyForm = document.getElementById('meeting-frequency');
+
+      self.handlePropertyStatusActive();
+      self.handleWatchlistToggle();
+
+      // button click
+      cancelChangesBtn.addEventListener('click', function(){
+        self.retrieveDatabaseChangelog();
+        self.retrieveDatabasePropertyStatus();
+      });
+      saveChangesBtn.addEventListener('click', function() {
+          // get value from field
+           var watchlistStatus = document.getElementById('watch-list-status-wrapper').elements['watch-list-status'].value;
+           var effectiveDate = effectiveDateForm.value;
+           var watchLevelStatus = watchLevelForm.value;
+           var meetingFrequencyStatus = meetingFrequencyForm.value;
+
+          if (watchlistStatus !== currentStatus.watchlistStatus) {
+            statusUpdate.watchlistStatus = watchlistStatus;
+            self.handleChangelogUpdate('Watchlist', watchlistStatus, effectiveDate);
+          }
+
+          if (watchLevelStatus.toString() !== currentStatus.watchLevelStatus.toString()) {
+              statusUpdate.watchLevelStatus = watchLevelStatus;
+              self.handleChangelogUpdate('Watch Level', watchLevelStatus);
+          }
+          if (meetingFrequencyStatus !== currentStatus.meetingFrequencyStatus) {
+            statusUpdate.meetingFrequencyStatus = meetingFrequencyStatus;
+            self.handleChangelogUpdate('Meeting Frequency', meetingFrequencyStatus);
+          }
+          var dealIssuesSelected = [].slice.call(eventSelect.selectedOptions);
+          dealIssuesSelected.forEach(function (el) {
+            var dealIssuesObject = {
+              "issueShort": el.value,
+              "issue": el.innerHTML
+            };
+            dealIssuesArr.push(dealIssuesObject);
+            self.handleChangelogUpdate('Issue Added', el.innerHTML);
+          });
+
+          var tagsList = document.getElementById('tags-list').elements;
+          if (tagsList) {
+            var elementsArray = [].slice.call(tagsList);
+            elementsArray.forEach(function (el) {
+              if (el.checked) {
+                dealIssuesArr.push(
+                    {"issueShort": el.value,
+                      "issue": el.dataset.issue
+                    });
+              }
+              else if (!el.checked) {
+                self.handleChangelogUpdate('Issue Resolved', el.dataset.issue);
+              }
+            });
+          }
+        statusUpdate.dealIssuesStatus = dealIssuesArr.sort();
+        self.updatePropertyStatusDatabase(statusUpdate);
+        });
+    },
     handlePropertyStatusActive: function() {
       var self=this;
       var saveChangesBtn = document.getElementsByName('save-changes')[0];
