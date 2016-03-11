@@ -635,6 +635,27 @@ var pageFunctions = {
       }
       self.updateChangelogDatabase(changeLogEntry);
     },
+    retrieveDatabaseChangelog: function(key) {
+      var self=this;
+      var ref = new Firebase('https://putneydbtest.firebaseio.com/');
+      var usersRef = ref.child("changelog");
+      var bar = [];
+
+      usersRef.on("value", function(snapshot) {
+        snapshot.forEach(function(data, i) {
+          var fooBar =
+          {
+            "changeDate": data.val().changeDate,
+            "changeType": data.val().changeType,
+            "changeValue": data.val().changeValue
+          };
+          bar.push(fooBar);
+        });
+        self.buildChangelog(bar);
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+    },
     /*
     UTILITIES
     */
