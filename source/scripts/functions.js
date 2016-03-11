@@ -419,6 +419,16 @@ var pageFunctions = {
         }, 400);
       }
     },
+    handleTagDeleteModal: function(state, string) {
+      var self=this;
+      console.log('handleTagDeleteModal', state, string);
+
+      var modal = document.getElementById('tag-delete-modal');
+      var modalMessage = document.getElementById('modal-message');
+
+      modal.classList.add('posting-modal--active');
+      modalMessage.innerHTML = "Confirm delete of deal issue " + string;
+    },
     /*
     BUTTON HANDLERS
     */
