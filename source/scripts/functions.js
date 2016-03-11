@@ -457,7 +457,6 @@ var pageFunctions = {
     },
     handleEditDeleteButton: function(key) {
       var self=this;
-      console.log('handleEditButton');
       var deleteButton = document.getElementById('delete-button');
       var confirmButton = document.getElementById('confirm-delete');
       var cancelButton = document.getElementById('cancel-delete');
