@@ -623,6 +623,18 @@ var pageFunctions = {
         }
       });
     },
+    handleChangelogUpdate: function(updateType, value, date) {
+      var self=this;
+      if (!date) {
+        var date = self.dateGetter();
+      }
+      var changeLogEntry = {
+        "changeDate": date,
+        "changeType": updateType,
+        "changeValue": value
+      }
+      self.updateChangelogDatabase(changeLogEntry);
+    },
     /*
     UTILITIES
     */
