@@ -429,6 +429,16 @@ var pageFunctions = {
       modal.classList.add('posting-modal--active');
       modalMessage.innerHTML = "Confirm delete of deal issue " + string;
     },
+    handleMultiTest: function() {
+      var self=this;
+      document.getElementById("tags-list").addEventListener("click", function(e) {
+        if(e.target && e.target.nodeName == "LABEL") {
+          var tagVal = e.target.innerHTML;
+          self.handleTagDeleteModal(true, tagVal);
+          self.handleTagDeleteButton(e.target);
+        }
+      });
+    },
     /*
     BUTTON HANDLERS
     */
