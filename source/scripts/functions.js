@@ -623,6 +623,16 @@ var pageFunctions = {
         }
       });
     },
+    handlePropertyStatusModal: function() {
+      var self=this;
+      $(".js-example-basic-multiple").val(null).trigger("change");
+      document.getElementById('save-modal').classList.add('posting-modal--active')
+      setTimeout(function(){
+        document.getElementById('save-modal').classList.remove('posting-modal--active');
+        document.getElementsByName('save-changes')[0].disabled = true;
+        document.location.reload(true)
+      }, 2000);
+    },
     retrieveDatabasePropertyStatus: function(key) {
       var self=this;
       var ref = new Firebase('https://putneydbtest.firebaseio.com/propertyStatus');
