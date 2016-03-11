@@ -623,6 +623,14 @@ var pageFunctions = {
         }
       });
     },
+    retrieveDatabasePropertyStatus: function(key) {
+      var self=this;
+      var ref = new Firebase('https://putneydbtest.firebaseio.com/propertyStatus');
+      ref.on("value", function(snapshot) {
+        self.showPropertyStatus(snapshot.val());
+        self.handlePropertyStatusChange(snapshot.val());
+      });
+    },
     handleChangelogUpdate: function(updateType, value, date) {
       var self=this;
       if (!date) {
