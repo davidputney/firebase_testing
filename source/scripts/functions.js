@@ -609,6 +609,20 @@ var pageFunctions = {
         }
       });
     },
+    updateChangelogDatabase: function(status) {
+      var self=this;
+      var ref = new Firebase('https://putneydbtest.firebaseio.com/');
+      var notesRef = ref.child("changelog");
+      var newPostRef = notesRef.push(status, function(error) {
+        // var postID = newPostRef.key();
+        if (error) {
+            console.log("Data could not be saved." + error);
+        } else {
+          console.log("Changelog database saved successfully.");
+          // self.handlePropertyStatusModal();
+        }
+      });
+    },
     /*
     UTILITIES
     */
