@@ -596,6 +596,19 @@ var pageFunctions = {
         	}
       });
     },
+    updatePropertyStatusDatabase: function(status) { // adds info to DB
+      var self=this;
+      var ref = new Firebase('https://putneydbtest.firebaseio.com/');
+      var notesRef = ref.child("propertyStatus");
+      var newPostRef = notesRef.update(status, function(error) {
+        if (error) {
+            console.log("Data could not be saved." + error);
+        } else {
+          console.log("Property status saved successfully.");
+          self.handlePropertyStatusModal();
+        }
+      });
+    },
     /*
     UTILITIES
     */
