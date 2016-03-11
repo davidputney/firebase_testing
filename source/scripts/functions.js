@@ -635,6 +635,31 @@ var pageFunctions = {
       }
       self.updateChangelogDatabase(changeLogEntry);
     },
+    buildChangelog: function(changelogArr) {
+      var self=this;
+
+      changelogArr.reverse();
+
+      var changelogTable = document.getElementById('changelog');
+
+        changelogArr.forEach(function(el) {
+          var changelogRow = document.createElement('TR');
+          var dateCell = document.createElement('TD');
+          var typeCell = document.createElement('TD');
+          var changeCell = document.createElement('TD');
+          var nameCell = document.createElement('TD');
+
+          dateCell.innerHTML = self.fixDate(el.changeDate);
+          typeCell.innerHTML = el.changeType;
+          changeCell.innerHTML = el.changeValue;
+          nameCell.innerHTML = 'jsmith';
+          changelogRow.appendChild(dateCell);
+          changelogRow.appendChild(typeCell);
+          changelogRow.appendChild(changeCell);
+          changelogRow.appendChild(nameCell);
+          changelogTable.appendChild(changelogRow);
+        });
+    },
     retrieveDatabaseChangelog: function(key) {
       var self=this;
       var ref = new Firebase('https://putneydbtest.firebaseio.com/');
