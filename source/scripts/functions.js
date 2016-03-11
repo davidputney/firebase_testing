@@ -470,6 +470,30 @@ var pageFunctions = {
         }, 400);
       });
     },
+    buildTagList: function(tagListValues) {
+      var self=this;
+      var taglistElement = document.getElementById('tags-list');
+      taglistElement.innerHTML = '';
+
+      if (tagListValues) {
+        tagListValues.forEach(function(el) {
+          var checkbox = document.createElement('INPUT');
+          checkbox.type = 'checkbox';
+          checkbox.value = el.issueShort;
+          checkbox.name = 'tags-list-item';
+          checkbox.id = el.issueShort;
+          checkbox.checked = true;
+          checkbox.dataset.issue = el.issue;
+
+          var label = document.createElement('LABEL');
+          label.htmlFor = el.issueShort;
+          label.innerHTML = el.issue;
+
+          taglistElement.appendChild(checkbox);
+          taglistElement.appendChild(label);
+          });
+      }
+    },
     /*
     UTILITIES
     */
