@@ -31,6 +31,13 @@ var pageFunctions = {
       var key = self.getNoteKey();
       self.retrieveDatabaseNote(key);
     },
+    intializeMultiPage: function() {
+      var self=this;
+      self.initializeMultiSelect('.js-example-basic-multiple', "Add deal Issues");
+      self.handleMultiTest();
+      self.retrieveDatabasePropertyStatus();
+      self.retrieveDatabaseChangelog();
+    },
     initializeMultiSelect: function(el, plText) {
       var self=this;
       $(el).select2({
