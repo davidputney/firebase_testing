@@ -696,8 +696,14 @@ var pageFunctions = {
          return url;
     },
     dateSetter: function() {
+      var self=this;
       var datePicker = document.getElementsByName('date')[0];
       var meetingDatePicker = document.getElementsByName("meeting-date")[0];
+      var dateSet = self.dateGetter();
+      datePicker.value = dateSet;
+      meetingDatePicker.value = dateSet;
+    },
+    dateGetter: function() {
       var today = new Date();
       var dd = today.getDate();
       var mm = today.getMonth()+1; //January is 0!
@@ -708,9 +714,7 @@ var pageFunctions = {
       if(mm<10) {
         mm='0'+mm;
       }
-      var dateSet = (yyyy + '-' + mm + '-' + dd);
-        datePicker.value = dateSet;
-        meetingDatePicker.value = dateSet;
+      return (yyyy + '-' + mm + '-' + dd);
     },
     noteTypeSetter: function () {
       var self=this;
