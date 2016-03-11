@@ -506,6 +506,18 @@ var pageFunctions = {
       // clears values out of multiselect
       $(".js-example-basic-multiple").val(null).trigger("change");
     },
+    handlePropertyStatusActive: function() {
+      var self=this;
+      var saveChangesBtn = document.getElementsByName('save-changes')[0];
+        document.getElementById('forms-container').addEventListener('change', function(e) {
+          if (e.target && e.target.matches("input") || e.target.matches("select")) {
+            saveChangesBtn.disabled = false;
+          }
+        });
+        $(".js-example-basic-multiple").on("select2:select", function (e) {
+          saveChangesBtn.disabled = false;
+      });
+    },
     /*
     UTILITIES
     */
