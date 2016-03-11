@@ -494,6 +494,18 @@ var pageFunctions = {
           });
       }
     },
+    showPropertyStatus: function(status) {
+      var self=this;
+      if (status) {
+        var propertyStatusForm = document.getElementById('watch-list-status-wrapper').elements['watch-list-status'].value = status.watchlistStatus;
+        var watchLevelForm = document.getElementsByName('watch-level')[0].value = status.watchLevelStatus;
+        var meetingFrequencyForm = document.getElementById('meeting-frequency').value = status.meetingFrequencyStatus;
+        document.getElementsByName('effective-date')[0].value = self.dateGetter();
+        self.buildTagList(status.dealIssuesStatus);
+      }
+      // clears values out of multiselect
+      $(".js-example-basic-multiple").val(null).trigger("change");
+    },
     /*
     UTILITIES
     */
