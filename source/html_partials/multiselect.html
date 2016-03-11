@@ -1,18 +1,92 @@
-<div class="forms-container">
-  <select id="multiselect" class="js-example-basic-multiple" multiple="multiple">
-    <option value="BD">Bad Debt (BD)</option>
-    <option value="DC">Debt Coverage Ratio < 1.0 (DC)</option>
-    <option value="DM">Delinquent Mortgage Payments (DM)</option>
-    <option value="DT">Delinquent Taxes (DT)</option>
-    <option value="DR">Distribution not Received (DR)</option>
-    <option value="AR">Excessive Tenant Account Receivables (AR)</option>
-    <option value="IA">GP Advances and Fees Accruing Interest (IA)</option>
-    <option value="OP">Going Concern Opinion (OP)</option>
-    <option value="DS">High Debt Service (DS)</option>
-    <option value="EX">High Operating Expense (EX)</option>
-    <option value="HP">High Payables Or Accrued Expenses (HP)</option>
-    <option value="ID">Improper Distribution (ID)</option>
+<div class="forms-container" id="forms-container">
+
+  <fieldset id="watch-list-status-wrapper">
+      <label>On Watchlist</label>
+        <input type="radio" class="watch-list-selector" name="watch-list-status" value="yes"> Yes<br>
+        <input type="radio" class="watch-list-selector" name="watch-list-status" value="no"> No<br>
+  <div class="spacer-2"></div>
+  <div class="optional-form">
+    <label>Effective Date</label>
+      <input type="date" name="effective-date" class="effective-date-selector">
+  </div>
+  </fieldset>
+
+  <div class="spacer-2"></div>
+
+  <label>Watch Level</label>
+  <select name="watch-level" id="watch-level" class="watch-level-selector">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
   </select>
+
+  <div class="spacer-2"></div>
+
+  <label>Meeting Frequency</label>
+  <select name="meeting-frequency" id="meeting-frequency" class="meeting-selector">
+    <option value="monthly">Monthly</option>
+    <option value="weekly">Weekly</option>
+    <option value="none">None</option>
+  </select>
+
   <div class="spacer-3"></div>
-  <input id="value" type="button" value="Show">
+
+  <label>Deal issues</label>
+  <fieldset id="tags-list" class="tags-list"></fieldset>
+
+<div class="spacer-3"></div>
+
+    <select id="multiselect" class="js-example-basic-multiple" multiple="multiple" name="deal-issues">
+      <option value="BD">Bad Debt (BD)</option>
+      <option value="DC">Debt Coverage Ratio < 1.0 (DC)</option>
+      <option value="DM">Delinquent Mortgage Payments (DM)</option>
+      <option value="DT">Delinquent Taxes (DT)</option>
+      <option value="DR">Distribution not Received (DR)</option>
+      <option value="AR">Excessive Tenant Account Receivables (AR)</option>
+      <option value="IA">GP Advances and Fees Accruing Interest (IA)</option>
+      <option value="OP">Going Concern Opinion (OP)</option>
+      <option value="DS">High Debt Service (DS)</option>
+      <option value="EX">High Operating Expense (EX)</option>
+      <option value="HP">High Payables Or Accrued Expenses (HP)</option>
+      <option value="ID">Improper Distribution (ID)</option>
+    </select>
+  <div class="spacer-3"></div>
+  <input type="button" class="" name="save-changes" value ="Save Changes" disabled>
+  <input type="button" class="btn-gray" value="Cancel" id="cancel-update" name="cancel-update">
 </div>
+
+
+<div id="tag-delete-modal" class="posting-modal">
+  <h2 id="modal-message"></h2>
+  <div>
+    <input type="button" value="Delete" id="confirm-tag-delete">
+    <input type="button" class="btn-gray" value="Cancel" id="cancel-delete">
+  </div>
+</div>
+
+<div id="save-modal" class="posting-modal">
+  <h2>Changes saved</h2>
+</div>
+
+<div class="forms-container">
+  <table id="changelog">
+    <tr>
+      <th class="header-set-x-narrow">
+        Effective Date
+      </th>
+      <th class="header-set-narrow">
+        Update Type
+      </th>
+      <th>
+        New Value
+      </th>
+      <th class="header-set-x-narrow">
+        User
+      </th>
+    </tr>
+  </table>
+</div>
+
+<div class="spacer-4"></div>
