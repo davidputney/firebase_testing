@@ -458,6 +458,18 @@ var pageFunctions = {
         editButton.disabled = false;
       });
     },
+    handleTagDeleteButton: function(elClicked) {
+      var self=this;
+      var deleteButton = document.getElementById('confirm-tag-delete');
+      var postingModal= document.getElementById('tag-delete-modal');
+
+      deleteButton.addEventListener('click', function() {
+        elClicked.classList.add('tag--checked');
+        setTimeout(function(){
+          postingModal.classList.remove('posting-modal--active');
+        }, 400);
+      });
+    },
     /*
     UTILITIES
     */
