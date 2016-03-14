@@ -36,7 +36,7 @@ var pageFunctions = {
       self.initializeMultiSelect('.js-example-basic-multiple', "Add deal Issues");
       self.handleMultiTest();
       self.handlePropertyStatusActive();
-      self.handleWatchlistToggle();
+      // self.handleWatchlistToggle();
       self.showPropertyStatus();
       // self.handlePropertyStatusChange();
       // self.retrieveDatabaseChangelog();
@@ -571,9 +571,6 @@ var pageFunctions = {
       var watchLevelForm = document.getElementsByName('watch-level')[0];
       var meetingFrequencyForm = document.getElementById('meeting-frequency');
 
-      // self.handlePropertyStatusActive();
-      // self.handleWatchlistToggle();
-
       // button click
       cancelChangesBtn.addEventListener('click', function(){
         // self.retrieveDatabaseChangelog();
@@ -636,17 +633,12 @@ var pageFunctions = {
           if (e.target && e.target.matches("input") || e.target.matches("select")) {
             saveChangesBtn.disabled = false;
           }
+          if (e.target && e.target.matches("input.watch-list-selector")) {
+              document.getElementsByClassName('optional-form')[0].classList.add('form-active');
+          	}
         });
         $(".js-example-basic-multiple").on("select2:select", function (e) {
           saveChangesBtn.disabled = false;
-      });
-    },
-    handleWatchlistToggle: function() {
-      console.log('toggle');
-      document.getElementById('watch-list-status-wrapper').addEventListener('change', function(e) {
-        if (e.target && e.target.matches("input.watch-list-selector")) {
-            document.getElementsByClassName('optional-form')[0].classList.add('form-active');
-        	}
       });
     },
     updatePropertyStatusDatabase: function(status) { // adds info to DB
