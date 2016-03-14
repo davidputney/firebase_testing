@@ -534,21 +534,31 @@ var pageFunctions = {
           });
       }
     },
-    showPropertyStatus: function(status) {
+    showPropertyStatus: function() {
       var self=this;
-      if (status) {
+
+      var databaseValues = self.retrieveDatabasePromise('https://putneydbtest.firebaseio.com/propertyStatus');
+
+      // clears values out of multiselect
+      $(".js-example-basic-multiple").val(null).trigger("change");
+      databaseValues.then(function(status) {
+
+        var status = status.val();
+
         var propertyStatusForm = document.getElementById('watch-list-status-wrapper').elements['watch-list-status'].value = status.watchlistStatus;
         var watchLevelForm = document.getElementsByName('watch-level')[0].value = status.watchLevelStatus;
         var meetingFrequencyForm = document.getElementById('meeting-frequency').value = status.meetingFrequencyStatus;
         document.getElementsByName('effective-date')[0].value = self.dateGetter();
+
         self.buildTagList(status.dealIssuesStatus);
-      }
-      // clears values out of multiselect
-      $(".js-example-basic-multiple").val(null).trigger("change");
         self.handlePropertyStatusChange(status);
+
+    });
     },
     handlePropertyStatusChange: function (currentStatus) {
       var self=this;
+
+      console.log('prop status');
 
       var changeLog = [];
       var dealIssuesArr = [];
