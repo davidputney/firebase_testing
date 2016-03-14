@@ -190,6 +190,23 @@ var pageFunctions = {
         }
       });
     },
+    retrieveDatabasePromise: function(url) {
+      var self=this;
+      var foo;
+      var ref = new Firebase(url);
+
+      var p = new Promise(function(resolve, reject) {
+        ref.on("value", function(snapshot) {
+          if (snapshot) {
+            resolve(snapshot);
+          } else {
+            reject('fail');
+          }
+        });
+    })
+     return p;
+  },
+
     /*
     GET INFO FROM DB
     */
