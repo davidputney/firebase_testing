@@ -733,7 +733,6 @@ var pageFunctions = {
     },
     getNoteKey: function() {
       var self=this;
-      console.log('getNoteKey');
          var url = window.location.search.substring(1).split('=')[1];
          return url;
     },
