@@ -37,6 +37,8 @@ var pageFunctions = {
       self.handleMultiTest();
       self.retrieveDatabasePropertyStatus();
       self.retrieveDatabaseChangelog();
+      // self.handlePropertyStatusChange();
+      // self.retrieveDatabaseChangelog();
     },
     initializeMultiSelect: function(el, plText) {
       var self=this;
@@ -541,6 +543,7 @@ var pageFunctions = {
       }
       // clears values out of multiselect
       $(".js-example-basic-multiple").val(null).trigger("change");
+        self.handlePropertyStatusChange(status);
     },
     handlePropertyStatusChange: function (currentStatus) {
       var self=this;
