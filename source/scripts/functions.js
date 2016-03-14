@@ -641,6 +641,7 @@ var pageFunctions = {
       });
     },
     handleWatchlistToggle: function() {
+      console.log('toggle');
       document.getElementById('watch-list-status-wrapper').addEventListener('change', function(e) {
         if (e.target && e.target.matches("input.watch-list-selector")) {
             document.getElementsByClassName('optional-form')[0].classList.add('form-active');
