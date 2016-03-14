@@ -571,13 +571,13 @@ var pageFunctions = {
       var watchLevelForm = document.getElementsByName('watch-level')[0];
       var meetingFrequencyForm = document.getElementById('meeting-frequency');
 
-      self.handlePropertyStatusActive();
-      self.handleWatchlistToggle();
+      // self.handlePropertyStatusActive();
+      // self.handleWatchlistToggle();
 
       // button click
       cancelChangesBtn.addEventListener('click', function(){
-        self.retrieveDatabaseChangelog();
-        self.retrieveDatabasePropertyStatus();
+        // self.retrieveDatabaseChangelog();
+        // self.retrieveDatabasePropertyStatus();
       });
       saveChangesBtn.addEventListener('click', function() {
           // get value from field
