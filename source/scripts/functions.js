@@ -35,10 +35,12 @@ var pageFunctions = {
       var self=this;
       self.initializeMultiSelect('.js-example-basic-multiple', "Add deal Issues");
       self.handleMultiTest();
-      self.retrieveDatabasePropertyStatus();
-      self.retrieveDatabaseChangelog();
+      self.handlePropertyStatusActive();
+      self.handleWatchlistToggle();
+      self.showPropertyStatus();
       // self.handlePropertyStatusChange();
       // self.retrieveDatabaseChangelog();
+      self.buildChangelog();
     },
     initializeMultiSelect: function(el, plText) {
       var self=this;
