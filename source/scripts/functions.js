@@ -631,7 +631,8 @@ var pageFunctions = {
     handlePropertyStatusActive: function() {
       var self=this;
       var saveChangesBtn = document.getElementsByName('save-changes')[0];
-        document.getElementById('forms-container').addEventListener('change', function(e) {
+
+      document.getElementById('forms-container').addEventListener('change', function(e) {
           if (e.target && e.target.matches("input") || e.target.matches("select")) {
             saveChangesBtn.disabled = false;
           }
