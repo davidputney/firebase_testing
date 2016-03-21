@@ -1,18 +1,20 @@
 <!doctype html>
 <html class="no-js" lang="">
     @@include('../html_partials/common/head.html')
-    <body  data-pagetype="note-create">
+    <body  data-pagetype="note-history">
         <!-- Add your site or application content here -->
-        @@include('../html_partials/common/nav.html')
-        @@include('../html_partials/forms.html')
-
+        <nav class="wide-nav">
+          <a href="property_status.html">Go to to Property Status >>></a>
+        </nav>
+        @@include('../html_partials/note_selector_create.html')
+        @@include('../html_partials/table.html')
     </body>
     @@include('../html_partials/common/js_links.html')
     <script>
     (function() {
       "use strict";
       pageFunctions.intialize();
-      pageFunctions.initializeIndex();
+      pageFunctions.intializeHistory();
     })();
     </script>
 </html>
