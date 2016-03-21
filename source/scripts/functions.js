@@ -697,16 +697,31 @@ var pageFunctions = {
       var databaseSnapshot =  self.retrieveDatabasePromise('https://putneydbtest.firebaseio.com/changelog/');
 
       databaseSnapshot.then(function(result) {
+
+        var dataArr = [];
+
         result.forEach(function(data) {
+
+          var dataItem = {
+            "changeType": data.val().changeType,
+            "changeValue":  data.val().changeValue,
+            "changeDate": data.val().changeDate
+          }
+          dataArr.unshift(dataItem);
+        });
+
+        console.log(dataArr);
+
+        dataArr.forEach(function(data) {
           var changelogRow = document.createElement('TR');
           var dateCell = document.createElement('TD');
           var typeCell = document.createElement('TD');
           var changeCell = document.createElement('TD');
           var nameCell = document.createElement('TD');
 
-          dateCell.innerHTML = self.fixDate(data.val().changeDate);
-          typeCell.innerHTML = data.val().changeType;
-          changeCell.innerHTML = data.val().changeValue;
+          dateCell.innerHTML = self.fixDate(data.changeDate);
+          typeCell.innerHTML = data.changeType;
+          changeCell.innerHTML = data.changeValue;
           nameCell.innerHTML = 'jsmith';
           changelogRow.appendChild(dateCell);
           changelogRow.appendChild(typeCell);
