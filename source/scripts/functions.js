@@ -96,7 +96,7 @@ var pageFunctions = {
       notePicker.addEventListener('change', function() {
         var noteType = notePicker.value;
         setTimeout(function(){
-          window.location.href = 'index.html?noteType=' + noteType;
+          window.location.href = 'record_create.html?noteType=' + noteType;
         }, 300);
       });
     },
@@ -319,7 +319,7 @@ var pageFunctions = {
         var date = self.fixDate(dataItem.noteDate);
 
         var a = document.createElement('A');
-            a.href = 'record.html?key=' + dataItem.key;
+            a.href = 'record_read.html?key=' + dataItem.key;
             a.innerHTML = date;
             dataCellDate.appendChild(a);
 
@@ -430,7 +430,7 @@ var pageFunctions = {
       else if (state === false  && key) {
         setTimeout(function(){
           postingModal.classList.remove('posting-modal--active');
-          window.location.href = 'record.html?key=' + key;
+          window.location.href = 'record_read.html?key=' + key;
         }, 1000);
       }
       else if (state === false  && !key) {
