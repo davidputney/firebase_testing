@@ -573,8 +573,7 @@ var pageFunctions = {
 
       // button click
       cancelChangesBtn.addEventListener('click', function(){
-        // self.retrieveDatabaseChangelog();
-        // self.retrieveDatabasePropertyStatus();
+
       });
       saveChangesBtn.addEventListener('click', function() {
           // get value from field
