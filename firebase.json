@@ -1,4 +1,7 @@
 {
   "firebase": "protonotesapp",
-  "public": "public"
+  "public": "public",
+  "ignore": [
+    "fusion_notes.md"
+  ]
 }
