@@ -125,7 +125,7 @@ gulp.task('templates', function() {
                   hideComments: false,
                   indent: true}))
    .pipe(gulp.dest(paths.pageTemplates.testing))
-   .pipe(htmlmin({collapseWhitespace: true}))
+  //  .pipe(htmlmin({collapseWhitespace: true}))
    .pipe(gulp.dest(paths.pageTemplates.dist));
 });
 
@@ -135,7 +135,7 @@ gulp.task('concat', function() {
    gulp.src([paths.scripts.vendor, paths.scripts.input,'!' + paths.scripts.exclude, '!' + paths.scripts.bower])
    .pipe(concat('main.js'))
    .pipe(gulp.dest(paths.scripts.testing))
-   .pipe(minifyJS())
+  //  .pipe(minifyJS())
    .pipe(gulp.dest(paths.scripts.dist));
 });
 gulp.task('exclude', function() {
